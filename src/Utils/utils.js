@@ -1,4 +1,3 @@
-import ObservationList from "../components/ObservationList";
 
 export const minTemp = tempratures => {
     tempratures.sort( (a, b) => a.value - b.value);
