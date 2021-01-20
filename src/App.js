@@ -2,6 +2,7 @@ import { useState } from 'react';
 import './App.css';
 import Header from './components/Header';
 import ObservationList from './components/ObservationList';
+import EnterObservation from './components/EnterObservation'
 
 function App() {
   const [date, setDate] = useState(new Date())
@@ -44,10 +45,28 @@ function App() {
     }
   ]);
 
+  const addTemperature = (point, value) => {
+    const newObservationData = observationData.map((item) => {
+      if (item.point === point) {
+        const updatedItem = {
+          ...item,
+          temperatures: item.temperatures.concat({ value, date: new Date() })
+        };
+ 
+        return updatedItem;
+      }
+ 
+      return item;
+    });
+ 
+    setObservationData(newObservationData);
+  }
+
   return (
     <div className="App">
       <Header date={date}/>
-      <ObservationList observations = {observationData}/>
+      <EnterObservation handleAdd={addTemperature}/>
+      <ObservationList observations={observationData}/>
     </div>
   );
 }
