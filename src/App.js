@@ -41,10 +41,11 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <div>
       <Header/>
       <EnterObservation handleAdd={addTemperature}/>
       <ObservationList observations={observationData}/>
+      <footer className="flex-row">Reaktor task</footer>
     </div>
   );
 }

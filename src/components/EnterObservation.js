@@ -17,7 +17,7 @@ export default function EnterObservation({ handleAdd }) {
     return (
       <div>
         <label>
-          Pick observation point:
+          Observation point:
           <select value={point} onChange={handlePointChange}>
             <option value="Amsterdam">Amsterdam</option>
             <option value="Dubai">Dubai</option>
