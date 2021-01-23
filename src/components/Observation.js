@@ -8,9 +8,9 @@ export default function Observation({ observation }) {
     return (
         <div>
             point: {observation.point},
-            current: {current.value},
-            minimum: {minimum.value},
-            maximum: {maximum.value}
+            current: {(current !=='NULL'? current.value: 'No Data')},
+            minimum: {(minimum !=='NULL'? minimum.value: 'No Data')},
+            maximum: {(maximum !=='NULL'? maximum.value: 'No Data')},
         </div>
     );
 }

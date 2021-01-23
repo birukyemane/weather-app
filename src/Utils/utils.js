@@ -1,16 +1,24 @@
 
 export const minTemp = tempratures => {
-    tempratures.sort( (a, b) => a.value - b.value);
-    return tempratures[0];
+    if(tempratures.length){
+        tempratures.sort( (a, b) => a.value - b.value);
+         return tempratures[0];
+    }
+    return 'NULL';
 }
 
 export const maxTemp = tempratures => {
-    tempratures.sort( (a, b) => b.value - a.value);
-    return tempratures[0];
+    if(tempratures.length){
+        tempratures.sort( (a, b) => b.value - a.value);
+        return tempratures[0];
+    }
+    return 'NULL';
 }
 
 export const currentTemp = tempratures => {
-    tempratures.sort( (a, b) => b.date - a.date);
-    return tempratures[0];
+    if(tempratures.length){
+        tempratures.sort( (a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        return tempratures[0];
+    }
+    return 'NULL';
 }
-

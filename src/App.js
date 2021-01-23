@@ -1,70 +1,48 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import './App.css';
 import Header from './components/Header';
 import ObservationList from './components/ObservationList';
-import EnterObservation from './components/EnterObservation'
+import EnterObservation from './components/EnterObservation';
+
 
 function App() {
-  const [date, setDate] = useState(new Date())
-  const [observationData, setObservationData] = useState([
-    {
-      id: '1',
-      point: 'Helsinki',
-      temperatures: [
-        {
-          date: new Date("October 13, 2014 11:13:00"),
-          value: 1
-        },
-        {
-          date: new Date("October 13, 2014 12:13:00"),
-          value: 4
-        },
-        {
-          date: new Date("October 13, 2014 14:13:00"),
-          value: 5
-        }
-      ] 
-    },
-    {
-      id: '2',
-      point: 'New York',
-      temperatures: [
-        {
-          date: new Date("October 13, 2014 11:13:00"),
-          value: 1
-        },
-        {
-          date: new Date("October 13, 2014 12:13:00"),
-          value: 4
-        },
-        {
-          date: new Date("October 13, 2014 14:13:00"),
-          value: 5
-        }
-      ] 
-    }
-  ]);
+  const [observationData, setObservationData] = useState([]);
+
+  useEffect(() => {
+    axios({
+      method: 'get',
+      url: 'http://localhost:3001/observations',
+    })
+    .then(function (response) {
+      setObservationData(response.data)
+    })
+    .catch(err => console.log(err))
+  }, []);
 
   const addTemperature = (point, value) => {
-    const newObservationData = observationData.map((item) => {
-      if (item.point === point) {
-        const updatedItem = {
-          ...item,
-          temperatures: item.temperatures.concat({ value, date: new Date() })
-        };
- 
-        return updatedItem;
+    axios.put('http://localhost:3001/observations', {
+      point,
+      value
+    })
+    .then((response) => {
+      if(response.data !== {}){
+        const newObservationData = observationData.map((item) => {
+          if (item.point === response.data.point) {
+            return response.data;
+          }
+     
+          return item;
+        });
+        setObservationData(newObservationData);
       }
- 
-      return item;
-    });
- 
-    setObservationData(newObservationData);
+    })
+    .catch(err => console.log(err));
   }
 
   return (
     <div className="App">
-      <Header date={date}/>
+      <Header/>
       <EnterObservation handleAdd={addTemperature}/>
       <ObservationList observations={observationData}/>
     </div>
