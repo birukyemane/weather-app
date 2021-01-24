@@ -45,7 +45,10 @@ function App() {
       <Header/>
       <EnterObservation handleAdd={addTemperature}/>
       <ObservationList observations={observationData}/>
-      <footer className="flex-row">Reaktor task</footer>
+      <footer className='footer'>
+        <hr></hr>
+        <p className="footer-title">copyright@Biruk</p>
+      </footer>
     </div>
   );
 }
