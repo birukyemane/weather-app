@@ -1,14 +1,9 @@
-import { minTemp, maxTemp, currentTemp } from '../Utils/utils'
-import moment from 'moment'
+import { minTemp, maxTemp, currentTemp, filterTamperatures } from '../Utils/utils'
 
 export default function Observation({ observation }) {
     const {point, temperatures} = observation;
 
-    let filteredTemperatures = temperatures.filter((temperature) => {
-        const result = moment().subtract(24, 'hours')
-        return moment(temperature.createdAt).isAfter(result);
-    })
-
+    const filteredTemperatures = filterTamperatures(temperatures);
     const current = currentTemp(filteredTemperatures);
     const minimum = minTemp(filteredTemperatures);
     const maximum = maxTemp(filteredTemperatures);
