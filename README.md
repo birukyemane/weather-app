@@ -3,8 +3,15 @@
 
 # features 
 
-* Users can enter temprature observations and its saved to database
-* Users can see  info such as current, min and max temperature within the last 24 hours
+* Enter temprature observations at five observatin points and its saved to database
+* Shows info such as current, min and max temperature within the last 24 hours
+* Users cannot create new observation points, the supported observation points are : 
+    * Tokio
+    * Helsinki
+    * New York
+    * Amsterdam
+    * Dubai
+
 
 # Technolgies
 * React
